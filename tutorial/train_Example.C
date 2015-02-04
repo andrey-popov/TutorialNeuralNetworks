@@ -1,6 +1,6 @@
 {
     // Create a log file and a TMVA factory
-    TString jobName("CompleteExample");
+    TString jobName("TutorialTrain");
     TFile infoFile(TString("info") + jobName + ".root", "recreate");
     TMVA::Factory factory(jobName, &infoFile, "Color=True");
     
@@ -19,16 +19,12 @@
     TTree *bkgTestTree = (TTree *) bkgTestFile.Get("Vars");
     
     
-    // Give the trees to the factory. The second argument is an additional weight applied to all
-    //events in the tree
+    // Feed the trees to the factory. The second argument is an additional weight, which is applied
+    //to all events in the tree
     factory.AddSignalTree(sgnTrainTree, 1., TMVA::Types::kTraining);
     factory.AddBackgroundTree(bkgTrainTree, 1., TMVA::Types::kTraining);
     factory.AddSignalTree(sgnTestTree, 1., TMVA::Types::kTesting);
     factory.AddBackgroundTree(bkgTestTree, 1., TMVA::Types::kTesting);
-    
-    
-    // Specify the event weight
-    factory.SetWeightExpression("Weight");
     
     
     // Specify input variables
@@ -43,11 +39,15 @@
     factory.AddVariable("tt_NumPassBTag_Light", 'F');
     
     
+    // Specify the event weight
+    factory.SetWeightExpression("Weight");
+    
+    
     // Make the factory copy and preprocess the trees
     factory.PrepareTrainingAndTestTree("", "NormMode=EqualNumEvents");
     
     
-    // Book MVA methods
+    // Book some MVA methods
     factory.BookMethod(TMVA::Types::kLikelihood, jobName + "_Likelihood");
     factory.BookMethod(TMVA::Types::kMLP, jobName + "_BP",
      "VarTransform=Norm:TrainingMethod=BP:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
@@ -57,7 +57,7 @@
      "NCycles=100:TestRate=1:UseRegulator=True");
     
     
-    // Train and test the MVA
+    // Train and test all the MVA methods
     factory.TrainAllMethods();
     factory.TestAllMethods();
     factory.EvaluateAllMethods();
