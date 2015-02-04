@@ -23,8 +23,8 @@
     //events in the tree
     factory.AddSignalTree(sgnTrainTree, 1., TMVA::Types::kTraining);
     factory.AddBackgroundTree(bkgTrainTree, 1., TMVA::Types::kTraining);
-    factory.AddSignalTree(sgnTestTree, 10., TMVA::Types::kTesting);
-    factory.AddBackgroundTree(bkgTestTree, 10., TMVA::Types::kTesting);
+    factory.AddSignalTree(sgnTestTree, 1., TMVA::Types::kTesting);
+    factory.AddBackgroundTree(bkgTestTree, 1., TMVA::Types::kTesting);
     
     
     // Specify the event weight
@@ -50,13 +50,10 @@
     // Book MVA methods
     factory.BookMethod(TMVA::Types::kLikelihood, jobName + "_Likelihood");
     factory.BookMethod(TMVA::Types::kMLP, jobName + "_BP",
-     "TrainingMethod=BP:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
-     "BPMode=batch:NCycles=500:TestRate=5");
-    factory.BookMethod(TMVA::Types::kMLP, jobName + "_BFGS",
-     "TrainingMethod=BFGS:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
-     "NCycles=100:TestRate=1");
+     "VarTransform=Norm:TrainingMethod=BP:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
+     "BPMode=sequential:NCycles=500:TestRate=5");
     factory.BookMethod(TMVA::Types::kMLP, jobName + "_BFGS_WeightDecay",
-     "TrainingMethod=BFGS:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
+     "VarTransform=Norm:TrainingMethod=BFGS:NeuronType=tanh:HiddenLayers=20:EstimatorType=CE:"
      "NCycles=100:TestRate=1:UseRegulator=True");
     
     
