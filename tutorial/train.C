@@ -16,10 +16,11 @@
     TTree *bkgTestTree = (TTree *) bkgTestFile.Get("Vars");
     
     
-    // STEP 2: Feed trees with signal and background events to the TMVA factory
+    // STEP 2: Feed trees with signal and background events to the TMVA factory. Specify per-event
+    //weights
     
     
-    // STEP 3: Specify input variables and per-event weights
+    // STEP 3: Specify input variables
     
     
     // STEP 4: Command the TMVA factory to copy and process the trees

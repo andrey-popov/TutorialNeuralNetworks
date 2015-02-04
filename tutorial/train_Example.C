@@ -27,20 +27,20 @@
     factory.AddBackgroundTree(bkgTestTree, 1., TMVA::Types::kTesting);
     
     
-    // Specify input variables
-    factory.AddVariable("glb_Charge_Lep", 'F');
-    factory.AddVariable("glb_Sphericity", 'F');
-    factory.AddVariable("abs(tHq_Eta_Recoil)", 'F');
-    factory.AddVariable("tHq_NumBTag_Higgs", 'F');
-    factory.AddVariable("log(tHq_Pt_Higgs)", 'F');
-    factory.AddVariable("log(tHq_Pt_Recoil)", 'F');
-    factory.AddVariable("tt_DeltaR_Light", 'F');
-    factory.AddVariable("log(tt_Mass_TopHad)", 'F');
-    factory.AddVariable("tt_NumPassBTag_Light", 'F');
-    
-    
     // Specify the event weight
     factory.SetWeightExpression("Weight");
+    
+    
+    // Specify input variables
+    factory.AddVariable("glb_Charge_Lep");
+    factory.AddVariable("glb_Sphericity");
+    factory.AddVariable("abs(tHq_Eta_Recoil)");
+    factory.AddVariable("tHq_NumBTag_Higgs");
+    factory.AddVariable("log(tHq_Pt_Higgs)");
+    factory.AddVariable("log(tHq_Pt_Recoil)");
+    factory.AddVariable("tt_DeltaR_Light");
+    factory.AddVariable("log(tt_Mass_TopHad)");
+    factory.AddVariable("tt_NumPassBTag_Light");
     
     
     // Make the factory copy and preprocess the trees
