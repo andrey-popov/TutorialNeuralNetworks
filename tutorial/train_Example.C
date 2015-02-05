@@ -61,7 +61,4 @@
     factory.TrainAllMethods();
     factory.TestAllMethods();
     factory.EvaluateAllMethods();
-    
-    
-    return 0;
 }

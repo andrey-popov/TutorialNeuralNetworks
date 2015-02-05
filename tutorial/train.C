@@ -34,6 +34,4 @@
     
     // STEP 6: Train the NN and run testing for it
     
-    
-    return 0;
 }
